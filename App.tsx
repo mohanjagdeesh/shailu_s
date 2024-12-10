@@ -1,11 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import CustomOnboardingScreen from './src/screens/customOnboardingScreen/CustomOnboardingScreen';
-import LoginScreen from './src/screens/LoginScreen';
+import LoginScreen from './src/screens/signInScreen/LoginScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
-import { Colors } from './src/utils/Colors';
+import {Colors} from './src/utils/Colors';
 import SplashScreen from './src/screens/splashScreen/SplashScreen';
 
 export type RootStackParamList = {
@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   const [isFirstLaunch, setIsFirstLaunch] = useState<boolean | null>(null);
-  const [splashScreen , setSplashScreen] = useState<boolean>(true);
+  const [splashScreen, setSplashScreen] = useState<boolean>(true);
 
   useEffect(() => {
     const checkFirstLaunch = async () => {
@@ -27,7 +27,6 @@ export default function App() {
         const value = await AsyncStorage.getItem('alreadyLaunched');
         console.log('alreadyLaunched value from AsyncStorage:', value);
         if (value === null) {
-          await AsyncStorage.setItem('alreadyLaunched', 'true');
           setIsFirstLaunch(true);
         } else {
           setIsFirstLaunch(false);
@@ -40,19 +39,20 @@ export default function App() {
   }, []);
 
   if (splashScreen) {
-    setTimeout(()=>{
+    setTimeout(() => {
       setSplashScreen(false);
-    },5000);
+    }, 5000);
     return (
       // eslint-disable-next-line react/react-in-jsx-scope
-      <SplashScreen/>
+      <SplashScreen />
     );
   }
 
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={isFirstLaunch ? 'Onboarding' : 'Login'} screenOptions={{statusBarBackgroundColor:Colors.blumine}}>
+        initialRouteName={isFirstLaunch ? 'Onboarding' : 'Login'}
+        screenOptions={{statusBarBackgroundColor: Colors.blumine}}>
         <Stack.Screen
           name="Onboarding"
           component={CustomOnboardingScreen}
