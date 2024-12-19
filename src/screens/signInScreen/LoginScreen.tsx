@@ -18,37 +18,43 @@ const LoginScreen: React.FC = ({navigation}: any) => {
 
   return (
     <View style={CustomSignInStyles.container}>
-      <Text style={CustomSignInStyles.title}>Welcome back,</Text>
-      <Text style={CustomSignInStyles.subtitle}>
-        Glad to meet you again!, please login to use the app.
-      </Text>
-      <InputField
-        placeholder="Email"
-        iconName="email"
-        keyboardType="email-address" // For email
-        autoCapitalize="none" // Prevent auto-capitalization
-        textContentType="emailAddress" // Helps autofill on iOS
-      />
-      <InputField
-        placeholder="Password"
-        iconName="lock"
-        secureTextEntry={passwordVisible}
-        isPasswordField
-        toggleVisibility={() => setPasswordVisible(!passwordVisible)}
-      />
-      <TouchableOpacity onPress={handleForgotPassword}>
-        <Text style={CustomSignInStyles.link}>Forgot password?</Text>
-      </TouchableOpacity>
-      <Button title="Sign In" onPress={() => {}} />
-      <SignInWithGoogleButton onPress={handleSignInWithGoogle} />
-      <Text style={CustomSignInStyles.footer}>
-        Don’t have an account?{' '}
-        <Text
-          style={CustomSignInStyles.link}
-          onPress={() => navigation.navigate('SignUp')}>
-          Join Now
+      <View>
+        <Text style={CustomSignInStyles.title}>Welcome back,</Text>
+        <Text style={CustomSignInStyles.subtitle}>
+          Glad to meet you again!, please login to use the app.
         </Text>
-      </Text>
+      </View>
+      <View>
+        <InputField
+          placeholder="Email"
+          iconName="email"
+          keyboardType="email-address" // For email
+          autoCapitalize="none" // Prevent auto-capitalization
+          textContentType="emailAddress" // Helps autofill on iOS
+        />
+        <InputField
+          placeholder="Password"
+          iconName="lock"
+          secureTextEntry={passwordVisible}
+          isPasswordField
+          toggleVisibility={() => setPasswordVisible(!passwordVisible)}
+        />
+        <TouchableOpacity onPress={handleForgotPassword}>
+          <Text style={CustomSignInStyles.link}>Forgot password?</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <Button title="Sign In" onPress={() => {}} />
+        <SignInWithGoogleButton onPress={handleSignInWithGoogle} />
+        <Text style={CustomSignInStyles.footer}>
+          Don’t have an account?{' '}
+          <Text
+            style={CustomSignInStyles.link}
+            onPress={() => navigation.navigate('SignUp')}>
+            Join Now
+          </Text>
+        </Text>
+      </View>
     </View>
   );
 };

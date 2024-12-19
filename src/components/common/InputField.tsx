@@ -1,21 +1,8 @@
 import React, {useState} from 'react';
-import {
-  TextInput,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  TextInputAndroidProps,
-} from 'react-native';
+import {TextInput, StyleSheet, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-interface InputFieldProps extends TextInputAndroidProps {
-  iconName?: string;
-  placeholder?: string;
-  secureTextEntry?: boolean;
-  toggleVisibility?: () => void;
-  isPasswordField?: boolean;
-  [key: string]: any;
-}
+import {InputFieldProps} from '../../interfaces/IInput';
+import {Colors} from '../../utils/Colors';
 
 const InputField: React.FC<InputFieldProps> = ({
   iconName,
@@ -25,13 +12,32 @@ const InputField: React.FC<InputFieldProps> = ({
   isPasswordField = false,
   ...rest
 }) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+
+  const isActive = isFocused || inputValue;
+
   return (
-    <View style={styles.container}>
-      {iconName && <Icon name={iconName} size={20} style={styles.icon} />}
+    <View style={[styles.container, isFocused && styles.focusedContainer]}>
+      {iconName && (
+        <Icon
+          name={iconName}
+          size={20}
+          style={[
+            styles.icon,
+            {color: isActive ? Colors.blumine : Colors.grey},
+          ]}
+        />
+      )}
       <TextInput
-        style={styles.input}
+        style={[styles.input, {color: isActive ? Colors.blumine : Colors.grey}]}
         placeholder={placeholder}
+        placeholderTextColor="Colors.grey"
         secureTextEntry={secureTextEntry}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        onChangeText={setInputValue}
+        value={inputValue}
         {...rest}
       />
       {isPasswordField && (
@@ -39,7 +45,10 @@ const InputField: React.FC<InputFieldProps> = ({
           <Icon
             name={secureTextEntry ? 'visibility-off' : 'visibility'}
             size={20}
-            style={styles.icon}
+            style={[
+              styles.icon,
+              {color: isFocused || inputValue ? Colors.blumine : Colors.grey},
+            ]}
           />
         </TouchableOpacity>
       )}
@@ -52,10 +61,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
+    borderColor: Colors.grey,
+    borderRadius: 50,
     padding: 10,
     marginBottom: 15,
+  },
+  focusedContainer: {
+    borderColor: Colors.blumine,
   },
   icon: {
     marginHorizontal: 10,

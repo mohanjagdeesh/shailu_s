@@ -4,20 +4,22 @@ const {width, height} = Dimensions.get('window');
 
 export const CustomSignInStyles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.white,
     flex: 1,
-    padding: 20,
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontFamily: 'Manrope-Regular',
+    fontWeight: '700',
     color: '#111111',
   },
   subtitle: {
     fontSize: 14,
-    textAlign: 'center',
-    marginBottom: 20,
+    fontFamily: 'NunitoSans_7pt-Regular',
+    fontWeight: '400',
     color: '#50555C',
   },
   link: {

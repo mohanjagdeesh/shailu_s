@@ -1,5 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, Image, View} from 'react-native';
+import {Colors} from '../../utils/Colors';
 
 const SignInWithGoogleButton: React.FC<{onPress: () => void}> = ({onPress}) => {
   return (
@@ -20,8 +21,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
+    borderColor: Colors.blumine,
+    borderRadius: 50,
     padding: 10,
     marginVertical: 10,
     justifyContent: 'center',
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: '#000',
+    color: Colors.blumine,
   },
 });
 

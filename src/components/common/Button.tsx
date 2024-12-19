@@ -7,6 +7,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import {Colors} from '../../utils/Colors';
 
 interface ButtonProps {
   title: string;
@@ -25,14 +26,16 @@ const Button: React.FC<ButtonProps> = ({title, onPress, style, textStyle}) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#006666',
+    backgroundColor: Colors.blumine,
     padding: 15,
-    borderRadius: 8,
+    borderRadius: 50,
     alignItems: 'center',
   },
   text: {
-    color: '#fff',
+    color: Colors.white,
     fontSize: 16,
+    fontWeight: 600,
+    fontFamily: 'Manrope-Regular',
   },
 });
 

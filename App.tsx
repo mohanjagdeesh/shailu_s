@@ -1,18 +1,23 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import CustomOnboardingScreen from './src/screens/customOnboardingScreen/CustomOnboardingScreen';
-import LoginScreen from './src/screens/signInScreen/LoginScreen';
+import LoginScreen from './src/screens/AI/LoginScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
-import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
+import ForgotPasswordScreen from './src/screens/AI/ForgotPasswordScreen';
 import {Colors} from './src/utils/Colors';
 import SplashScreen from './src/screens/splashScreen/SplashScreen';
+import SignUpScreen from './src/screens/AI/SignUpScreen';
+import EmailVerificationScreen from './src/screens/AI/EmailVerificationScreen';
+import ResetPasswordScreen from './src/screens/AI/ResetPasswordScreen';
 
 export type RootStackParamList = {
   Login: undefined;
   SignUp: undefined; // Add SignUp here
   Onboarding: undefined;
   ForgotPassword: undefined;
+  EmailVerification: undefined;
+  ResetPassword: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -50,7 +55,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
+      {/* <Stack.Navigator
         initialRouteName={isFirstLaunch ? 'Onboarding' : 'Login'}
         screenOptions={{statusBarBackgroundColor: Colors.blumine}}>
         <Stack.Screen
@@ -68,6 +73,18 @@ export default function App() {
           component={ForgotPasswordScreen}
           options={{headerShown: true, title: 'Forgot Password'}}
         />
+      </Stack.Navigator> */}
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen
+          name="EmailVerification"
+          component={EmailVerificationScreen}
+        />
+        <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
